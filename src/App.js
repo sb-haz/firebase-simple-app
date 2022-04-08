@@ -58,11 +58,11 @@ function App() {
           <div>
             <h1>{user.name}</h1>
             <h1>{user.age}</h1>
-            <button
-              onClick={() => { updateUserAge(user.id, user.age - 1) }}
+            {/* Increase user age */}
+            <button onClick={() => { updateUserAge(user.id, user.age - 1) }}
             > - 1 </button>
-            <button
-              onClick={() => { updateUserAge(user.id, user.age + 1) }}
+            {/* Decrease user age */}
+            <button onClick={() => { updateUserAge(user.id, user.age + 1) }}
             > + 1 </button>
           </div>
         )
