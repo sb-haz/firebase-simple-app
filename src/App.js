@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { db } from './firebase-config'
-import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, updateDoc, deleteDoc } from 'firebase/firestore'
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -18,8 +18,14 @@ function App() {
 
   // Update user age
   const updateUserAge = async (id, age) => {
-    const userDoc = doc(db, "users", id)
-    await updateDoc(userDoc, { age: age })
+    const userDocument = doc(db, "users", id)
+    await updateDoc(userDocument, { age: age })
+  }
+
+  // Delete user
+  const deleteUser = async (id) => {
+    const userDocument = doc(db, "users", id)
+    await deleteDoc(userDocument)
   }
 
   // Get all users from the database
@@ -64,6 +70,8 @@ function App() {
             {/* Decrease user age */}
             <button onClick={() => { updateUserAge(user.id, user.age + 1) }}
             > + 1 </button>
+            {/* Delete user */}
+            <button onClick={() => {deleteUser(user.id)}}>Delete Doc</button>
           </div>
         )
       })}
